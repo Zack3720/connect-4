@@ -336,7 +336,7 @@ def clear_board(board):
     board = [[' ' for j in range(6)] for i in range(7)]
     for i in range(7):
         for j in range(6):
-            window[i,j].update(image_filename='Connect 4\grey.png')
+            window[i,j].update(image_filename='grey.png')
     return board
 
 MAX_COL = 7
@@ -345,22 +345,22 @@ size = 70
 #Layout of the game window
 game_layout =  [
     [
-        sg.Button(size=(size, size), key=(j,0), pad=(0,0), image_filename='Connect 4\grey.png') for j in range(MAX_COL)
+        sg.Button(size=(size, size), key=(j,0), pad=(0,0), image_filename='grey.png') for j in range(MAX_COL)
     ],
     [
-        sg.Button(size=(size, size), key=(j,1), pad=(0,0), image_filename='Connect 4\grey.png') for j in range(MAX_COL)
+        sg.Button(size=(size, size), key=(j,1), pad=(0,0), image_filename='grey.png') for j in range(MAX_COL)
     ],
     [
-        sg.Button(size=(size, size), key=(j,2), pad=(0,0), image_filename='Connect 4\grey.png') for j in range(MAX_COL)
+        sg.Button(size=(size, size), key=(j,2), pad=(0,0), image_filename='grey.png') for j in range(MAX_COL)
     ],
     [
-        sg.Button(size=(size, size), key=(j,3), pad=(0,0), image_filename='Connect 4\grey.png') for j in range(MAX_COL)
+        sg.Button(size=(size, size), key=(j,3), pad=(0,0), image_filename='grey.png') for j in range(MAX_COL)
     ],
     [
-        sg.Button(size=(size, size), key=(j,4), pad=(0,0), image_filename='Connect 4\grey.png') for j in range(MAX_COL)
+        sg.Button(size=(size, size), key=(j,4), pad=(0,0), image_filename='grey.png') for j in range(MAX_COL)
     ],
     [
-        sg.Button(size=(size, size), key=(j,5), pad=(0,0), image_filename='Connect 4\grey.png') for j in range(MAX_COL)
+        sg.Button(size=(size, size), key=(j,5), pad=(0,0), image_filename='grey.png') for j in range(MAX_COL)
     ],
     [
         sg.Button('Back', key='Back'),sg.Image(key='--',visible=True,pad=(205,0)),sg.Button('Reset', key='Reset')
@@ -369,14 +369,14 @@ game_layout =  [
 
 sidebar_layout = [
     [sg.Text('Next Turn',key='Sidebar Text')],
-    [sg.Image(size=(size,size), key=('Next Turn'), pad=(1,0), filename = 'Connect 4\\blankred.png')],
+    [sg.Image(size=(size,size), key=('Next Turn'), pad=(1,0), filename = 'blankred.png')],
     [sg.Button('Next Play', key=('AI Play'), pad=(0,0), visible=False)]
 ]
 
 layout2 = [[sg.Column(game_layout),sg.Column(sidebar_layout,key='Two Player Sidebar',pad=(1,200))]]
 
 #Layout of the start menu
-layout1 = [[sg.Image(filename='Connect 4\Connectfour.png')],
+layout1 = [[sg.Image(filename='Connectfour.png')],
            [sg.Button('0 Player',key='zero_player',pad=(20,0)),sg.Button('1 Player', key='one_player', pad=(0,0)),sg.Button('2 Player', key='two_player', pad=(20,0))]]
 
 #Combines the layouts so one is always invisible. This is so we can switch between them.
@@ -398,7 +398,7 @@ while True:
         board = clear_board(board)
         game_over = False
         window['Sidebar Text'].update('Next Turn')
-        window['Next Turn'].update(filename = 'Connect 4\\blankred.png')
+        window['Next Turn'].update(filename = 'blankred.png')
         turn = 'R'
         continue
     if event == 'zero_player':
@@ -438,7 +438,7 @@ while True:
     if players == 1:
         for i in range(6):
             if board[int(event)][5-i] == ' ':
-                window[(event,5-i)].update(image_filename= 'Connect 4\\red.png' if turn == 'R' else 'yellow.png')
+                window[(event,5-i)].update(image_filename= 'red.png' if turn == 'R' else 'yellow.png')
                 window.Refresh()
                 board[event][5-i] = turn
                 turn = 'R' if turn == 'Y' else 'Y'
@@ -446,7 +446,7 @@ while True:
                 if game_over:
                     print(winner+ ' is the winner')
                     for tile_x,tile_y in tiles:
-                        changePicture(tile_x,tile_y, filename= 'Connect 4\winred.png' if board[tile_x][tile_y] == 'R' else 'Connect 4\winyellow.png')
+                        changePicture(tile_x,tile_y, filename= 'winred.png' if board[tile_x][tile_y] == 'R' else 'winyellow.png')
                 else:
                     start = time.time()
                     AI_move, value = find_next_move(board,turn,turn,6, -100, 100)
@@ -456,7 +456,7 @@ while True:
                         break
                     for j in range(6):
                         if board[AI_move][5-j] == ' ':
-                            window[(AI_move,5-j)].update(image_filename= 'Connect 4\\red.png' if turn == 'R' else 'Connect 4\yellow.png')
+                            window[(AI_move,5-j)].update(image_filename= 'red.png' if turn == 'R' else 'yellow.png')
                             board[AI_move][5-j] = turn
                             turn = 'R' if turn == 'Y' else 'Y'
                             break
@@ -468,11 +468,11 @@ while True:
         #Two player Code
         for i in range(6):
             if board[int(event)][5-i] == ' ':
-                window[(event,5-i)].update(image_filename= 'Connect 4\\red.png' if turn == 'R' else 'Connect 4\yellow.png')
+                window[(event,5-i)].update(image_filename= 'red.png' if turn == 'R' else 'yellow.png')
                 window.Refresh()
                 board[event][5-i] = turn
                 turn = 'R' if turn == 'Y' else 'Y'
-                window['Next Turn'].update(filename = 'Connect 4\\blankred.png' if turn == 'R' else 'Connect 4\\blankyellow.png')
+                window['Next Turn'].update(filename = 'blankred.png' if turn == 'R' else 'blankyellow.png')
                 break
         else:
             print('invalid play')
@@ -489,18 +489,18 @@ while True:
             continue
         for j in range(6):
             if board[AI_move][5-j] == ' ':
-                window[(AI_move,5-j)].update(image_filename= 'Connect 4\\red.png' if turn == 'R' else 'Connect 4\yellow.png')
+                window[(AI_move,5-j)].update(image_filename= 'red.png' if turn == 'R' else 'yellow.png')
                 board[AI_move][5-j] = turn
                 turn = 'R' if turn == 'Y' else 'Y'
-                window['Next Turn'].update(filename = 'Connect 4\\blankred.png' if turn == 'R' else 'Connect 4\\blankyellow.png')
+                window['Next Turn'].update(filename = 'blankred.png' if turn == 'R' else 'blankyellow.png')
                 break
 
 
 
     game_over, tiles, winner = is_game_over(board)
     if game_over:
-        window['Next Turn'].update(filename = 'Connect 4\\blankred.png' if winner == 'R' else 'Connect 4\\blankyellow.png')
+        window['Next Turn'].update(filename = 'blankred.png' if winner == 'R' else 'blankyellow.png')
         window['Sidebar Text'].update('Winner')
         for tile_x,tile_y in tiles:
-            changePicture(tile_x,tile_y, filename= 'Connect 4\winred.png' if board[tile_x][tile_y] == 'R' else 'Connect 4\winyellow.png')
+            changePicture(tile_x,tile_y, filename= 'winred.png' if board[tile_x][tile_y] == 'R' else 'winyellow.png')
 window.close()
